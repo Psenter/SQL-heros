@@ -9,9 +9,13 @@
 * Update new hero
 * Delete a hero from the table
 ### Should have:
-* Archnemesis
+* Can add new friends
+* Can add likes/dislikes
+* Heros can have multiple abilities
 ### Could have:
-* More heros
+* Can have mutual enemies
+* Can add new enemies
+* ASCII art for some visual elements
 ### Won't have:
 * Front end work
 
