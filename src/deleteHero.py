@@ -1,15 +1,30 @@
 import psycopg2
+from psycopg2 import OperationalError
 from database.connection import execute_query, create_connection
 
 def delete_hero():
-    name = input("Enter the name of the hero you would like to remove: ")
-    query = "DELETE FROM heroes WHERE name = %s"
-    params = (name,)
+    name = input("What is the name of the hero you want to remove? ")
 
     try:
-        execute_query(query, params)
-        print(f"Successfully deleted the hero.")
-    except psycopg2.Error as e:
-        print(f"Error occurred while deleting the hero: {e}")
+        connection = create_connection("postgres", "postgres", "postgres")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM heroes WHERE name = %s", (name,))
+        count = cursor.fetchone()[0]
+
+        if count == 0:
+            print(f"Hero is not found in the database.")
+        else:
+            query = "DELETE FROM heroes WHERE name = %s"
+            params = (name,)
+
+            cursor.execute(query, params)
+            connection.commit()
+            print("Successfully deleted the hero.")
+    except OperationalError as e:
+        print("The error '{e}' occurred.")
+    finally:
+        cursor.close()
+        connection.close()
 
 delete_hero()
