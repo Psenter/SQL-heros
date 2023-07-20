@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import OperationalError
 from database.connection import execute_query, create_connection
 
-def delete_hero():
+def deleteHero():
     name = input("What is the name of the hero you want to remove? ")
 
     try:
@@ -27,4 +27,4 @@ def delete_hero():
         cursor.close()
         connection.close()
 
-delete_hero()
+deleteHero()
