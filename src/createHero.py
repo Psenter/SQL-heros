@@ -3,7 +3,7 @@ from database.connection import execute_query, create_connection
 
 def create_hero():
     name = input("What is your hero's name? ")
-    about_me = input("Give a short description about your hero: ")
+    aboutMe = input("Give a short description about your hero: ")
     biography = input("What's your hero's backstory? ")
 
     superpower = input("What superpower does your hero have? ")
@@ -24,7 +24,7 @@ def create_hero():
                         superpower_id = cursor.fetchone()[0]
 
                     query = "INSERT INTO heroes (name, about_me, biography) VALUES (%s, %s, %s) RETURNING id"
-                    params = (name, about_me, biography)
+                    params = (name, aboutMe, biography)
                     cursor.execute(query, params)
 
                     hero_id = cursor.fetchone()[0]
